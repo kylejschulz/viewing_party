@@ -17,10 +17,10 @@ class ApplicationController < ActionController::Base
   end
 
   def require_same_user
-    if @current_user != @host
-      flash[:alert] = 'You can only access your own dashboard'
-      redirect_to user_dashboard_index_path(@current_user)
-    end
+    return if @current_user == @host
+
+    flash[:alert] = 'You can only access your own dashboard'
+    redirect_to user_dashboard_index_path(@current_user)
   end
 
   helper_method :current_user, :logged_in?, :require_user, :require_same_user

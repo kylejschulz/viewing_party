@@ -8,10 +8,7 @@ class UsersController < ApplicationController
     user[:email] = user[:email].downcase
     @user = User.create(user_params)
     if @user.save
-      UserMailer.registration_confirmation(@user).deliver_now
-      flash[:error] = 'Please activate your account by following the
-      instructions in the account confirmation email you received to proceed'
-      redirect_to login_path
+      user_save_helper(@user)
     else
       flash[:error] = @user.errors.full_messages.to_sentence
       render :new
@@ -27,6 +24,12 @@ class UsersController < ApplicationController
   end
 
   private
+
+  def user_save_helper(user)
+    UserMailer.registration_confirmation(user).deliver_now
+    flash[:error] = 'Please activate your account by visiting the confirmation email you received'
+    redirect_to login_path
+  end
 
   def user_params
     params.permit(:full_name, :email, :password, :password_confirmation)

@@ -14,7 +14,7 @@ RSpec.describe "user new page" do
       click_on "Submit"
 
       expect(current_path).to eq(login_path)
-      expect(page).to have_content("Please activate your account by following the instructions in the account confirmation email you received to proceed")
+      expect(page).to have_content("Please activate your account by visiting the confirmation email you received")
     end
 
     it "validates that the email is valid" do
@@ -72,7 +72,7 @@ RSpec.describe "user new page" do
       email = ActionMailer::Base.deliveries.last
 
       expect(current_path).to eq(login_path)
-      expect(page).to have_content("Please activate your account by following the instructions in the account confirmation email you received to proceed")
+      expect(page).to have_content("Please activate your account by visiting the confirmation email you received")
 
       user = User.find_by(email: 'kylschulz@gmail.com')
 
@@ -100,7 +100,7 @@ RSpec.describe "user new page" do
       fill_in :password, with: 'password'
       click_on "Log In"
 
-      expect(page).to have_content('Please activate your account by following the instructions in the account confirmation email you received to proceed')
+      expect(page).to have_content('Please activate your account by visiting the confirmation email you received')
     end
   end
 end

@@ -11,13 +11,17 @@ class MovieService
     page_num = 1
     if movie_search_get(name, page_num)[:total_results] != 0
       until movies.size >= 40 || movies.size == movie_search_get(name, page_num)[:total_results]
-        movie_search_get(name, page_num)[:results].map do |result|
-          movies << MovieObject.new(id: result[:id], title: result[:title], vote_average: result[:vote_average])
-        end
+        movie_search_object_creator(name, page_num, movies)
         page_num += 1
       end
     end
     movies.first(40)
+  end
+
+  def self.movie_search_object_creator(name, page_num, movies)
+    movie_search_get(name, page_num)[:results].map do |result|
+      movies << MovieObject.new(id: result[:id], title: result[:title], vote_average: result[:vote_average])
+    end
   end
 
   def self.top_forty_get(page_num)
@@ -72,8 +76,11 @@ class MovieService
     details = movie_details_get(movie_id)
     reviews = reviews_get(movie_id)
     cast = movie_cast_get(movie_id)[:cast].first(10)
-    hash = {
-      description: details[:overview],
+    MovieObject.new(initialize_object_helper(details, reviews, cast))
+  end
+
+  def self.initialize_object_helper(details, reviews, cast)
+    { description: details[:overview],
       id: details[:id],
       title: details[:title],
       vote_count: details[:vote_count],
@@ -82,10 +89,7 @@ class MovieService
       cast: cast,
       reviews: reviews[:results],
       genres: details[:genres],
-      poster: details[:poster_path]
-    }
-
-    MovieObject.new(hash)
+      poster: details[:poster_path] }
   end
 
   def self.connection
