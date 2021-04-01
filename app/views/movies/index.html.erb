@@ -1,6 +1,6 @@
 <h1>Welcome <%= @current_user.full_name %>!</h1>
 
-<%= button_to "Top 40 Movies", movies_path, method: :get, params: {top_40: true} %>
+<%= button_to "Top 40 Movies", movies_path, method: :get, params: {top_forty: true} %>
 
 <%= form_with url: movies_path, params: {search: true}, method: :get, local: true do |f| %>
   <%= f.text_field :search %>

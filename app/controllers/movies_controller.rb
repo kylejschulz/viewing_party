@@ -5,9 +5,9 @@ class MoviesController < ApplicationController
     if params[:search]
       @movies = MovieService.movie_search_objects(params[:search])
       @movies_partial = MovieService.no_movies?(params[:search])
-    elsif params[:top_40]
-      @movies = MovieService.top_40_objects
-      @movies_partial = MovieService.top_40_partial
+    elsif params[:top_forty]
+      @movies = MovieService.top_forty_objects
+      @movies_partial = MovieService.top_forty_partial
     else
       redirect_to discover_index_path
     end

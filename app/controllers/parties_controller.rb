@@ -13,7 +13,7 @@ class PartiesController < ApplicationController
     if @party.save
       @invitees = Invitee.create_multiple_invitees(params[:friends], @party.id)
 
-      flash[:success] = "Your Viewing Party Has Been Created!"
+      flash[:success] = 'Your Viewing Party Has Been Created!'
       redirect_to user_dashboard_index_path(@current_user)
     else
       flash[:error] = @party.errors.full_messages.to_sentence
@@ -22,6 +22,7 @@ class PartiesController < ApplicationController
   end
 
   private
+
   def party_params
     params.permit(:movie_id, :user_id, :duration, :time, :date)
   end

@@ -10,7 +10,7 @@ RSpec.describe MovieObject, type: :model do
       expect(movie.description).to eq(description)
       expect(movie.id).to eq(100)
       expect(movie.title).to eq("Lock, Stock and Two Smoking Barrels")
-      expect(movie.vote_count).to eq(4715)
+      expect(movie.vote_count).to eq(4718)
       expect(movie.vote_average).to eq(8.2)
     end
   end

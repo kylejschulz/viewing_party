@@ -25,7 +25,7 @@ http_interactions:
       Connection:
       - keep-alive
       Date:
-      - Wed, 31 Mar 2021 20:31:22 GMT
+      - Thu, 01 Apr 2021 00:29:53 GMT
       Server:
       - openresty
       Access-Control-Allow-Origin:
@@ -42,15 +42,15 @@ http_interactions:
       X-Cache:
       - Miss from cloudfront
       Via:
-      - 1.1 d29afc70fc2fdadee440493854714224.cloudfront.net (CloudFront)
+      - 1.1 ffa4b37ccdc94a8c62bf6b6414725210.cloudfront.net (CloudFront)
       X-Amz-Cf-Pop:
-      - DEN50-C2
+      - IAD89-C3
       X-Amz-Cf-Id:
-      - l65VR7stPX1a5RtV9pxQk-J5EcB-lu-hmRj82DRjdRSBqz-UQGyFNg==
+      - 7hgZwh439q9xJSI892XwLUNs75AeMD8UJDkuYoctPkhNEAW4Yhe8qA==
     body:
       encoding: UTF-8
       string: '{"page":1,"results":[],"total_pages":0,"total_results":0}'
-  recorded_at: Wed, 31 Mar 2021 20:31:22 GMT
+  recorded_at: Thu, 01 Apr 2021 00:29:53 GMT
 - request:
     method: get
     uri: https://api.themoviedb.org/3/search/movie?api_key=--PRIVATE--&language=en-US&query=ojafnciivpav
@@ -76,7 +76,7 @@ http_interactions:
       Connection:
       - keep-alive
       Date:
-      - Wed, 31 Mar 2021 20:31:22 GMT
+      - Thu, 01 Apr 2021 00:29:53 GMT
       Server:
       - openresty
       Access-Control-Allow-Origin:
@@ -93,15 +93,13 @@ http_interactions:
       X-Cache:
       - Hit from cloudfront
       Via:
-      - 1.1 48ea53c7edffa2cdbdc32f7d94966344.cloudfront.net (CloudFront)
+      - 1.1 10a9e9969f05a75cc05e6f70b8499f7e.cloudfront.net (CloudFront)
       X-Amz-Cf-Pop:
-      - DEN50-C2
+      - IAD89-C3
       X-Amz-Cf-Id:
-      - UEjCl6GtJnqK5wJkoWTB-449jLAhQcf2j3dSQupD_u7CiOiy63cxxg==
-      Age:
-      - '1'
+      - cwUpZAcKDGd3QCDN_d8iPBfirfViotU4bDLwiWSqCghYfRaz96f1Dw==
     body:
       encoding: UTF-8
       string: '{"page":1,"results":[],"total_pages":0,"total_results":0}'
-  recorded_at: Wed, 31 Mar 2021 20:31:23 GMT
+  recorded_at: Thu, 01 Apr 2021 00:29:53 GMT
 recorded_with: VCR 6.0.0

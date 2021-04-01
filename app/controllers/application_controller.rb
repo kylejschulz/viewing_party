@@ -10,15 +10,15 @@ class ApplicationController < ActionController::Base
   end
 
   def require_user
-    if !logged_in?
-      flash[:alert] = "You must be logged in to perform that action"
-      redirect_to login_path
-    end
+    return if logged_in?
+
+    flash[:alert] = 'You must be logged in to perform that action'
+    redirect_to login_path
   end
 
   def require_same_user
     if @current_user != @host
-      flash[:alert] = "You can only access your own dashboard"
+      flash[:alert] = 'You can only access your own dashboard'
       redirect_to user_dashboard_index_path(@current_user)
     end
   end

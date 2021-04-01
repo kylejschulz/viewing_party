@@ -1,37 +1,37 @@
 class MovieService
-  def self.movie_search_get(name, page_num)
-    response = connection.get("/3/search/movie") do |f|
+  def self.movie_search_get(name, _page_num)
+    response = connection.get('/3/search/movie') do |f|
       f.params['query'] = name.gsub(' ', '+')
     end
-    parsed = JSON.parse(response.body, symbolize_names: true)
+    parse(response)
   end
 
   def self.movie_search_objects(name)
     movies = []
     page_num = 1
     if movie_search_get(name, page_num)[:total_results] != 0
-      until movies.size >= 40 || movies.size == movie_search_get(name, page_num)[:total_results] do
+      until movies.size >= 40 || movies.size == movie_search_get(name, page_num)[:total_results]
         movie_search_get(name, page_num)[:results].map do |result|
           movies << MovieObject.new(id: result[:id], title: result[:title], vote_average: result[:vote_average])
         end
         page_num += 1
       end
-      movies.first(40)
     end
+    movies.first(40)
   end
 
-  def self.top_40_get(page_num)
-    response = connection.get("/3/movie/top_rated") do |f|
+  def self.top_forty_get(page_num)
+    response = connection.get('/3/movie/top_rated') do |f|
       f.params['page'] = page_num
     end
-    parsed = JSON.parse(response.body, symbolize_names: true)
+    parse(response)
   end
 
-  def self.top_40_objects
+  def self.top_forty_objects
     movies = []
     page_num = 1
-    until movies.size >= 40 do
-      self.top_40_get(page_num)[:results].each do |result|
+    until movies.size >= 40
+      top_forty_get(page_num)[:results].each do |result|
         movies << MovieObject.new(id: result[:id], title: result[:title], vote_average: result[:vote_average])
       end
       page_num += 1
@@ -41,7 +41,7 @@ class MovieService
 
   def self.movie_details_get(movie_id)
     response = connection.get("/3/movie/#{movie_id}")
-    parsed = JSON.parse(response.body, symbolize_names: true)
+    parse(response)
   end
 
   def self.movie_object(movie_id)
@@ -50,20 +50,21 @@ class MovieService
 
   def self.movie_cast_get(movie_id)
     response = connection.get("/3/movie/#{movie_id}/credits")
-    parsed = JSON.parse(response.body, symbolize_names: true)
+    parse(response)
   end
 
   def self.reviews_get(movie_id)
     response = connection.get("/3/movie/#{movie_id}/reviews?page=1")
-    parsed = JSON.parse(response.body, symbolize_names: true)
+    parse(response)
   end
 
   def self.no_movies?(name)
     return 'no_movies' if movie_search_get(name, 1)[:total_results].zero?
+
     'movies'
   end
 
-  def self.top_40_partial
+  def self.top_forty_partial
     'movies'
   end
 
@@ -87,8 +88,11 @@ class MovieService
     MovieObject.new(hash)
   end
 
-  private
   def self.connection
-    Faraday.new(url: "https://api.themoviedb.org", params: {"api_key": ENV['mdb_key'], "language": 'en-US'})
+    Faraday.new(url: 'https://api.themoviedb.org', params: { "api_key": ENV['mdb_key'], "language": 'en-US' })
+  end
+
+  def self.parse(response)
+    JSON.parse(response.body, symbolize_names: true)
   end
 end

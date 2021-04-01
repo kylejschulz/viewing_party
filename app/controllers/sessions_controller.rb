@@ -10,7 +10,8 @@ class SessionsController < ApplicationController
       flash[:success] = "Welcome #{user.full_name}"
       redirect_to user_dashboard_index_path(user)
     elsif user && user.authenticate(params[:password]) && !user.email_confirmed
-      flash[:error] = 'Please activate your account by following the instructions in the account confirmation email you received to proceed'
+      flash[:error] =
+        'Please activate your account by following the instructions in the account confirmation email you received to proceed'
       render :new
     else
       flash[:error] = 'Credentials do not match'
@@ -20,7 +21,7 @@ class SessionsController < ApplicationController
 
   def destroy
     session[:user_id] = nil
-    flash[:message] = "You have been logged out"
+    flash[:message] = 'You have been logged out'
     redirect_to root_path
   end
 end

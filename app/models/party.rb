@@ -1,7 +1,7 @@
 class Party < ApplicationRecord
   belongs_to :movie
-  belongs_to :host,  class_name: "User",  foreign_key: "user_id"
-  has_many :invitees
+  belongs_to :host, class_name: 'User', foreign_key: 'user_id', inverse_of: :parties
+  has_many :invitees, dependent: :destroy
   has_many :users, through: :invitees
 
   validates :duration, presence: true

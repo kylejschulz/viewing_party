@@ -20,15 +20,15 @@ RSpec.describe MovieService, type: :model do
       expect(result.size).to eq(2)
     end
 
-    it '#top_40_get', :vcr do
-      result = MovieService.top_40_get(1)[:results]
+    it '#top_forty_get', :vcr do
+      result = MovieService.top_forty_get(1)[:results]
 
       expect(result.first[:title]).to eq("Dilwale Dulhania Le Jayenge")
       expect(result.size).to eq(20)
     end
 
-    it '#top_40_objects', :vcr do
-      result = MovieService.top_40_objects
+    it '#top_forty_objects', :vcr do
+      result = MovieService.top_forty_objects
 
       expect(result.first.class).to eq(MovieObject)
       expect(result.first.title).to eq("Dilwale Dulhania Le Jayenge")

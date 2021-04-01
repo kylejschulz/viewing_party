@@ -8,6 +8,7 @@ class DashboardController < ApplicationController
   end
 
   private
+
   def set_host
     @host = User.find(params[:user_id])
   end

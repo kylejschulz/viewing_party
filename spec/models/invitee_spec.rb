@@ -35,8 +35,8 @@ RSpec.describe Invitee, type: :model do
     end
 
     it '#user?' do
-      expect(@invitee_1.user?(@host.id)).to eq("text-weight:normal")
-      expect(@invitee_2.user?(@host.id)).to eq("text-weight:normal")
+      expect(@invitee_1.user?(@host.id)).to eq("font-weight:normal")
+      expect(@invitee_2.user?(@host.id)).to eq("font-weight:normal")
     end
   end
 end
