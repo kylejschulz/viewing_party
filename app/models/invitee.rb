@@ -1,11 +1,11 @@
 class Invitee < ApplicationRecord
   belongs_to :party
   belongs_to :user
-
   delegate :full_name, to: :user
 
   def user?(user_id)
     return 'font-weight:bold' if self.user_id == user_id
+
     'font-weight:normal'
   end
 

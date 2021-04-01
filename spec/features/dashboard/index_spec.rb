@@ -107,7 +107,7 @@ RSpec.describe "User Dashboard Index" do
         click_on("Add Friend")
       end
 
-      expect(page).to have_content("This User Does Not Exist")
+      expect(page).to have_content("Check email is valid and not your own")
     end
 
     it "can not add self" do
@@ -122,7 +122,7 @@ RSpec.describe "User Dashboard Index" do
         click_on("Add Friend")
       end
 
-      expect(page).to have_content("You Can Not Add Yourself")
+      expect(page).to have_content("Check email is valid and not your own")
     end
 
     it "lists the parties i'm hosting" do

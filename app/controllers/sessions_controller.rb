@@ -6,13 +6,9 @@ class SessionsController < ApplicationController
   def create
     user = User.find_by(email: params[:email].downcase)
     if user && user.authenticate(params[:password]) && user.email_confirmed
-      session[:user_id] = user.id
-      flash[:success] = "Welcome #{user.full_name}"
-      redirect_to user_dashboard_index_path(user)
+      successful_create(user)
     elsif user && user.authenticate(params[:password]) && !user.email_confirmed
-      flash[:error] =
-        'Please activate your account by following the instructions in the account confirmation email you received to proceed'
-      render :new
+      email_not_confirmed
     else
       flash[:error] = 'Credentials do not match'
       render :new
@@ -23,5 +19,18 @@ class SessionsController < ApplicationController
     session[:user_id] = nil
     flash[:message] = 'You have been logged out'
     redirect_to root_path
+  end
+
+  private
+
+  def successful_create(user)
+    session[:user_id] = user.id
+    flash[:success] = "Welcome #{user.full_name}"
+    redirect_to user_dashboard_index_path(user)
+  end
+
+  def email_not_confirmed
+    flash[:error] = 'Please activate your account by visiting the confirmation email you received'
+    render :new
   end
 end
